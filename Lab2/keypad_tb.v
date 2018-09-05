@@ -33,6 +33,7 @@ module keypad_test;
 	b = 1; g = 1;                // pressing 0
       # 10 
 	b = 0; g = 0;                // pressing nothing
+	                           
       # 10 
       $finish;              // end the simulation
    end                      
