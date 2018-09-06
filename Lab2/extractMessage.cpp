@@ -20,6 +20,26 @@ char *extractMessage(const char *message_in, int length) {
 	}
 
 	// TODO: write your code here
-
+	int out = 0;
+	for (int ii = 0; ii < length; ii=ii+8) {
+	   for (int j = 0; j < 8; j++) {
+		 out = 0;
+		unsigned char temp = 1;
+		temp = temp<<j;
+	  	 for (int k = 0; k < 8; k++) {
+			unsigned char temp2 = (message_in[ii+k]&temp);			
+			if (int(temp2) > 0) {
+			  int sum = 1;
+			  for (int n = 0;n<k;n++) {
+				sum = sum*2;	
+				}
+			  out += sum;
+			}
+		}
+			
+			message_out[ii+j] = char(out);
+		}
+	
+	}
 	return message_out;
 }
