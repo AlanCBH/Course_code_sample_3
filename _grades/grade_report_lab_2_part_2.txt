@@ -1,0 +1,28 @@
+Grades for version committed on time
+	extract_message: 40.0 / 40
+			*Passed test: simple
+				*Encoded message: [0, 62, 85, 72, 6, 127, 127, 0] (>UH).
+				*Expected decode: [100, 114, 118, 106, 102, 98, 108, 0] (drvjfbl)
+				*Actual decode: [100, 114, 118, 106, 102, 98, 108, 0] (drvjfbl)
+			*Passed test: 3 words
+				*Encoded message: [179, 71, 78, 102, 8, 255, 255, 0, 212, 145, 70, 2, 48, 255, 247, 0, 103, 20, 98, 1, 132, 255, 247, 0, 1, 2, 1, 0, 2, 3, 3, 0] (³GNfÿÿÔF0ÿ÷gbÿ÷).
+				*Expected decode: [99, 111, 110, 116, 97, 105, 110, 97, 98, 108, 101, 32, 115, 112, 101, 99, 105, 101, 115, 32, 98, 101, 101, 112, 101, 114, 0] (containable species beeper)
+				*Actual decode: [99, 111, 110, 116, 97, 105, 110, 97, 98, 108, 101, 32, 115, 112, 101, 99, 105, 101, 115, 32, 98, 101, 101, 112, 101, 114, 0, 0, 0, 0, 0, 0] (containable species beeper)
+			*Passed test: 5 words
+				*Encoded message: [209, 186, 115, 18, 141, 255, 255, 0, 151, 13, 108, 238, 129, 255, 255, 0, 46, 26, 120, 20, 66, 255, 126, 0, 141, 79, 14, 78, 17, 255, 223, 0, 124, 241, 228, 76, 144, 255, 253, 0, 1, 6, 5, 4, 2, 7, 7, 0] (Ñºsÿÿlîÿÿ.xBÿ~ONÿß|ñäLÿý).
+				*Expected decode: [117, 110, 112, 114, 111, 102, 101, 115, 115, 105, 111, 110, 97, 108, 108, 121, 32, 115, 105, 103, 110, 101, 116, 32, 115, 110, 111, 111, 112, 32, 106, 97, 98, 32, 109, 105, 115, 103, 111, 118, 101, 114, 110, 0] (unprofessionally signet snoop jab misgovern)
+				*Actual decode: [117, 110, 112, 114, 111, 102, 101, 115, 115, 105, 111, 110, 97, 108, 108, 121, 32, 115, 105, 103, 110, 101, 116, 32, 115, 110, 111, 111, 112, 32, 106, 97, 98, 32, 109, 105, 115, 103, 111, 118, 101, 114, 110, 0, 0, 0, 0, 0] (unprofessionally signet snoop jab misgovern)
+			*Passed test: Thousands of words
+				*Output hidden (too long)
+		
+	count_ones: 40.0 / 40
+			*Passed test: 2
+			*Passed test: 55
+			*Passed test: 42
+			*Passed test: 0xffffffff
+			*Passed test: 0x12345678
+			*Passed test: 0x55555555
+		
+Total: 80.0 / 80
+
+Final Score: 80.0 / 80
