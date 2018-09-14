@@ -10,7 +10,10 @@ module alu32_test;
              A = 8; B = 4; control = `ALU_ADD; // try adding 8 and 4
         # 10 A = 2; B = 5; control = `ALU_SUB; // try subtracting 5 from 2
         // add more test cases here!
-
+		# 10 A = 0; B = 0; control = `ALU_ADD; // 0+0
+		# 10 A = 0; B = 0; control = `ALU_SUB; // 0-0
+		# 10 A = 32'h80000000; B = 32'h80000000; control = `ALU_ADD; // test overflow when two negative
+		# 10 A = 32'h40000000; B = 32'h40000000; control = `ALU_ADD; // test overflow when two positive
         # 10 $finish;
     end
 
