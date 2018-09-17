@@ -25,8 +25,19 @@ module test;
 	  regnum = 2;
 	  d = 89;
 
-        // Add your own testcases here!
-
+    
+    // Add your own testcases here!
+		# 10
+	//really change it;
+	enable = 1;
+	regnum = 2;
+	d = 89;
+		
+		# 10
+	// some edge cases 
+	enable = 1;
+	regnum = 4;
+	d = 32'h80000000;
         # 700 $finish;
     end
     
