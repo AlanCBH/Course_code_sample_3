@@ -25,10 +25,10 @@ module palindrome_control(palindrome, done, select, load, go, a_ne_b, front_ge_b
 	
 wire garbage,start,start_next,garbage_next,palindrome_next,rdone_next,process,process_next,rDone,pdone_next,pDone;
 assign garbage_next = (garbage & ~go) | reset;
-assign start_next = ((garbage & go) | (rDone & go) | (start & go) | (pDone & go) );
-assign process_next = ((start & ~go) | (process & ~front_ge_back & ~a_ne_b) );
-assign pdone_next = (process & a_ne_b) | (pDone & ~go);
-assign rdone_next = (process & front_ge_back & ~a_ne_b) | (rDone & ~go);
+assign start_next = ((garbage & go) | (rDone & go) | (start & go) | (pDone & go) ) & ~reset;
+assign process_next = ((start & ~go) | (process & ~front_ge_back & ~a_ne_b) ) & ~reset;
+assign pdone_next = (process & a_ne_b) | (pDone & ~go) &~reset;
+assign rdone_next = (process & front_ge_back & ~a_ne_b) | (rDone & ~go) & ~reset;
 assign select = (process);
 assign load = (process|start);
 //assign palindrome_next = ~(pDone & ~rDone);	
