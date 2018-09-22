@@ -49,7 +49,24 @@ module palindrome_circuit_test;
 	#2 base = 7; ending= 11; ld = 1; sel = 0;
 	# 10 sel = 1;
         // Add your own testcases here!
+	/*circuit.rf.r[1]  <= 32'h33333333;
+	circuit.rf.r[2]  <= 32'hFFFFFFFF;
+	circuit.rf.r[3]  <= 32'hFF6FFFFF;
+	circuit.rf.r[4] <= 32'h33333333;
+	
+	# 10  base = 1; ending= 4; go = 1;
+	# 20 go = 0;
 
+
+
+
+	circuit.rf.r[1]  <= 32'h33333333;
+	circuit.rf.r[2]  <= 32'hFFFFFFFF;
+	circuit.rf.r[3]  <= 32'hFFFFFFFF;
+	circuit.rf.r[4] <= 32'h33333333;
+	
+	# 10  base = 1; ending= 4; go = 1;
+	# 20 go = 0;*/
 
         #10 $finish;
     end

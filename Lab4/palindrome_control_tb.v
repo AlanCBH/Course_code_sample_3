@@ -51,7 +51,50 @@ module palindrome_control_test;
 	# 10  base = 7; ending= 11; go = 1;
 	# 20 go = 0;
         // Add your own testcases here!
+    /*circuit.rf.r[1]  <= 32'h33333333;
+	circuit.rf.r[2]  <= 32'hFFFFFFFF;
+	circuit.rf.r[3]  <= 32'hFF6FFFFF;
+	circuit.rf.r[4] <= 32'h33333333;
+	
+	# 10  base = 1; ending= 4; go = 1;
+	# 20 go = 0;
 
+
+
+
+	circuit.rf.r[1]  <= 32'h33333333;
+	circuit.rf.r[2]  <= 32'hFFFFFFFF;
+	circuit.rf.r[3]  <= 32'hFFFFFFFF;
+	circuit.rf.r[4] <= 32'h33333333;
+	
+	# 10  base = 1; ending= 4; go = 1;
+	# 20 go = 0;*/
+	# 10
+    circuit.rf.r[11] <= 32'h12344321;
+	circuit.rf.r[12] <= 32'h00000000;
+	circuit.rf.r[13] <= 32'h00000000;
+	circuit.rf.r[14] <= 32'h12344321;
+	# 2 base = 11; ending= 14; go = 1;
+	# 20 go = 0;
+
+
+	// Test an odd length palindrome
+	circuit.rf.r[2] <=  32'hCAFEBABE;
+	circuit.rf.r[3] <=  32'hFFFFFFFF;
+	circuit.rf.r[4] <=  32'h0B3D1E55;
+	circuit.rf.r[5] <=  32'hFFFFFFFF;
+	circuit.rf.r[6] <=  32'hCAFEBABE;
+	# 10 base = 2; ending= 6; go = 1;
+	# 20 go = 0;
+
+	// A failing test
+	circuit.rf.r[7]  <= 32'h33333333;
+	circuit.rf.r[8]  <= 32'hC001D0D3;
+	circuit.rf.r[9]  <= 32'hFFFFFFFF;
+	circuit.rf.r[10] <= 32'hBAB3D0D3;
+	circuit.rf.r[11] <= 32'h33333333;
+	# 10  base = 7; ending= 11; go = 1;
+	# 20 go = 0;
         #10 $finish;
     end
 
