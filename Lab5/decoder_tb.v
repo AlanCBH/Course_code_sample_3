@@ -7,7 +7,10 @@ module decoder_test;
 
              opcode = `OP_OTHER0; funct = `OP0_ADD; // try addition
         # 10 opcode = `OP_OTHER0; funct = `OP0_SUB; // try subtraction
+		# 10 opcode = `OP_ADDI; funct = `OP0_SUB; // try Addi with funct set to garbage value
+	    # 10 opcode = `OP_XORI; funct = `OP0_ADD; // try Xori with funct set to garbage value
         // add more tests here!
+		# 10 opcode = 2'h3f; funct = 2'h3f; //test except
 
         # 10 $finish;
     end

@@ -95,6 +95,9 @@ module palindrome_control_test;
 	circuit.rf.r[11] <= 32'h33333333;
 	# 10  base = 7; ending= 11; go = 1;
 	# 20 go = 0;
+	#10
+	# 10  base = 7; ending= 7; go = 1;
+	# 20 go = 0;
         #10 $finish;
     end
 
