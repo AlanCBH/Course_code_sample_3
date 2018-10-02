@@ -10,12 +10,15 @@ module decoder_test;
              opcode = `OP_OTHER0; funct = `OP0_ADD; // see if addition still works
         # 10 opcode = `OP_OTHER0; funct = `OP0_SUB; // see if subtraction still works
         // test all of the others here
-        
+
         // as should all the new instructions from this week
         # 10 opcode = `OP_BEQ; zero = 0; // try a not taken beq
         # 10 opcode = `OP_BEQ; zero = 1; // try a taken beq
         // add more tests here!
-
+        # 10 opcode = `OP_OTHER0; funct = 6'h2c; // test isAddm
+        # 10 opcode = `OP_LUI; //test lui
+        # 10 opcode = `OP_J; //test jump
+        # 10 opcode = 2'h3f; funct = 2'h3f; // test except
         # 10 $finish;
     end
 
