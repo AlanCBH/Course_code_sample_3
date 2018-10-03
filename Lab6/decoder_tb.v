@@ -18,7 +18,7 @@ module decoder_test;
         # 10 opcode = `OP_OTHER0; funct = 6'h2c; // test isAddm
         # 10 opcode = `OP_LUI; //test lui
         # 10 opcode = `OP_J; //test jump
-        # 10 opcode = 2'h3f; funct = 2'h3f; // test except
+        # 10 opcode = 8'h3f; funct = 8'h3f; // test except
         # 10 $finish;
     end
 
