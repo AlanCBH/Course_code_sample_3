@@ -63,7 +63,7 @@ module mips_decode(alu_op, writeenable, rd_src, alu_src2, except, control_type,
 	//assign except = ~w1;
 	or o2(w2,isOr,isNor,isAnd,isXor,isAndi,isOri,isXori);
 	assign alu_op[2] = w2;
-	or o3(w3,isAdd,isSub,isNor,isXor,isAddi,isXori,isLw,isLbu,isSb,isSw,isBeq,isBne,isSlt,isAddm);
+	or o3(w3,isAdd,isSub,isNor,isXor,isAddi,isXori,isLw,isLbu,isSb,isSw,isBeq,isBne,isSlt);
 	assign alu_op[1] = w3;
 	or o4(w4,isSub,isOr,isXor,isOri,isXori,isBeq,isBne,isSlt);
 	assign alu_op[0] = w4;
@@ -72,7 +72,7 @@ module mips_decode(alu_op, writeenable, rd_src, alu_src2, except, control_type,
 	or o5(r1,isAddi,isAndi,isOri,isXori,isBeq,isBne,isLui,isLw,isLbu,isSw,isSb);
 	assign rd_src = r1;
 	wire alus2;
-	or o6(alus2,isAddi,isAndi,isOri,isXori,isBeq,isBne,isLui,isLw,isLbu,isSw,isSb,isAddm);
+	or o6(alus2,isAddi,isAndi,isOri,isXori,isBeq,isBne,isLui,isLw,isLbu,isSw,isSb);
 	assign alu_src2 = alus2;
 
   wire ctype0,c1,c2,c3;
