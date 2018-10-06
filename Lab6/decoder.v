@@ -69,14 +69,14 @@ module mips_decode(alu_op, writeenable, rd_src, alu_src2, except, control_type,
 	assign alu_op[0] = w4;
 
 	wire r1;
-	or o5(r1,isAddi,isAndi,isOri,isXori,isBeq,isBne,isLui,isLw,isLbu,isSw,isSb);
+	or o5(r1,isAddi,isAndi,isOri,isXori,isLui,isLw,isLbu,isSw,isSb);
 	assign rd_src = r1;
 	wire alus2;
-	or o6(alus2,isAddi,isAndi,isOri,isXori,isBeq,isBne,isLui,isLw,isLbu,isSw,isSb);
+	or o6(alus2,isAddi,isAndi,isOri,isXori,isLui,isLw,isLbu,isSw,isSb);
 	assign alu_src2 = alus2;
 
   wire ctype0,c1,c2,c3;
-  and o7(c1,isBeq,zero);
+  assign c1 = isBeq&zero;
   assign c2 = isBne&~zero;
   or (ctype0,c1,c2,isJr);
   assign control_type[0] = ctype0;
