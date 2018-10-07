@@ -85,18 +85,21 @@ module full_machine(except, clock, reset);
 
 
     // this is mips decoder
-    data_mem mem(data_out, mainAluOut, rtData, word_we, byte_we, clock, reset);
+    wire [31:0] inputTomem;
+    data_mem mem(data_out, inputTomem, rtData, word_we, byte_we, clock, reset);
     mux4v #(8) bytemux(byte_out,data_out[7:0],data_out[15:8],data_out[23:16],data_out[31:24],mainAluOut[1:0]);
     assign byteToWord = {24'b0,byte_out};
     wire [31:0] mem_out;
     mux2v #(32) muxmem1(mem_out,data_out,byteToWord,byte_load);
-    wire [31:0] writeToAddm;
-    mux2v #(32) muxmem2(writeToAddm,sltout,mem_out,mem_read);
-    // wire for addm
     wire [31:0] writeToRd,RAddm;
+    wire [31:0] writeToAddm;
+    mux2v #(32) muxmem2(writeToRd,sltout,RAddm,mem_read);
+    // wire for addm
+
     wire useless21,useless22,useless23;
-    alu32 alu4(RAddm,useless21,useless22,useless23,rtData,writeToAddm,3'b010);
-    mux2v #(32) muxmem3(writeToRd,writeToAddm,RAddm,addm);
+    mux2v #(32) muxin(inputTomem,mainAluOut,rsData,addm);
+    alu32 alu4(writeToAddm,useless21,useless22,useless23,rtData,mem_out,3'b010);
+    mux2v #(32) muxmem3(RAddm,mem_out,writeToAddm,addm);
     //
     mux2v #(32) muxRd(rdData,writeToRd,luiData,lui);
     wire [5:0] funct;
