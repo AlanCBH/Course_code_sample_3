@@ -15,7 +15,7 @@ print_int_and_space:
 	li   	$a0, ' '       	# print a black space
 	li	$v0, PRINT_CHAR	# load the syscall option for printing chars
 	syscall			# print the char
-	
+
 	jr	$ra		# return to the calling procedure
 
 # main function ########################################################
@@ -28,7 +28,7 @@ main:
 	sub	$sp, $sp, 4
 	sw	$ra, 0($sp)		# save $ra on stack
 
-	
+
 	li	$a0, 0x010		# test has_single_bit_set (true case)
 	jal	has_single_bit_set
 	move	$a0, $v0
@@ -41,17 +41,36 @@ main:
 	jal	print_int_and_space	# this should print 0
 
 
-	li	$a0, 0x010		# test get_lowest_set_bit 
+	li	$a0, 0x010		# test get_lowest_set_bit
 	jal	get_lowest_set_bit
 	move	$a0, $v0
 	jal	print_int_and_space	# this should print 4
 
 
-	li	$a0, 0x008		# test get_lowest_set_bit 
+	li	$a0, 0x008		# test get_lowest_set_bit
 	jal	get_lowest_set_bit
 	move	$a0, $v0
 	jal	print_int_and_space	# this should print 3
 
+	li	$a0, 0x002		# test get_lowest_set_bit
+	jal	get_lowest_set_bit
+	move	$a0, $v0
+	jal	print_int_and_space	# this should print 1
+
+	li	$a0, 0x101		# test has_single_bit_set (false case)
+	jal	has_single_bit_set
+	move	$a0, $v0
+	jal	print_int_and_space	# this should print 0
+
+	li	$a0, 0x100		# test has_single_bit_set (true case)
+	jal	has_single_bit_set
+	move	$a0, $v0
+	jal	print_int_and_space	# this should print 1
+
+	li	$a0, 0x040		# test get_lowest_set_bit
+	jal	get_lowest_set_bit
+	move	$a0, $v0
+	jal	print_int_and_space	# this should print 6
 
 	lw	$ra, 0($sp)
 	add	$sp, $sp, 4
