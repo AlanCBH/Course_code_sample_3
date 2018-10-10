@@ -1,0 +1,64 @@
+Grades for version committed on time
+	full machine: 0.0 / 80
+			*Failed test: add
+				*Your output: Failed to compile
+			*Failed test: sub
+				*Your output: Failed to compile
+			*Failed test: and
+				*Your output: Failed to compile
+			*Failed test: or
+				*Your output: Failed to compile
+			*Failed test: nor
+				*Your output: Failed to compile
+			*Failed test: xor
+				*Your output: Failed to compile
+			*Failed test: addi
+				*Your output: Failed to compile
+			*Failed test: andi
+				*Your output: Failed to compile
+			*Failed test: ori
+				*Your output: Failed to compile
+			*Failed test: xori
+				*Your output: Failed to compile
+			*Failed test: lui
+				*Your output: Failed to compile
+			*Failed test: slt less than
+				*Your output: Failed to compile
+			*Failed test: slt equal
+				*Your output: Failed to compile
+			*Failed test: slt greater than
+				*Your output: Failed to compile
+			*Failed test: lbu
+				*Your output: Failed to compile
+			*Failed test: lbu
+				*Your output: Failed to compile
+			*Failed test: lbu
+				*Your output: Failed to compile
+			*Failed test: lbu
+				*Your output: Failed to compile
+			*Failed test: lw
+				*Your output: Failed to compile
+			*Failed test: sb
+				*Your output: Failed to compile
+			*Failed test: slt extra credit greater than
+				*Your output: Failed to compile
+			*Failed test: slt extra credit less than
+				*Your output: Failed to compile
+			*Failed test: j
+				*Your output: Failed to compile
+			*Failed test: jr
+				*Your output: Failed to compile
+			*Failed test: beq taken
+				*Your output: Failed to compile
+			*Failed test: beq not taken
+				*Your output: Failed to compile
+			*Failed test: bne taken
+				*Your output: Failed to compile
+			*Failed test: bne not taken
+				*Your output: Failed to compile
+			*Failed test: addm
+				*Your output: Failed to compile
+		
+Total: 0.0 / 80
+
+Final Score: 0.0 / 80
