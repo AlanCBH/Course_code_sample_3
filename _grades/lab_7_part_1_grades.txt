@@ -1,0 +1,18 @@
+Grades for version committed on time
+	has_single_bit_set: 15.0 / 15
+			*Passed test: has_single_bit_set("0x010")
+			*Passed test: has_single_bit_set("0x10b")
+			*Passed test: has_single_bit_set("0x800")
+			*Passed test: has_single_bit_set("0x801")
+			*Passed test: has_single_bit_set("0x0f0")
+		
+	get_lowest_set_bit: 15.0 / 15
+			*Passed test: get_lowest_set_bit("0x010")
+			*Passed test: get_lowest_set_bit("0x008")
+			*Passed test: get_lowest_set_bit("0xf00")
+			*Passed test: get_lowest_set_bit("0x8000")
+			*Passed test: get_lowest_set_bit("0x1")
+		
+Total: 30.0 / 30
+
+Final Score: 30.0 / 30
