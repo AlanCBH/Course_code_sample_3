@@ -41,6 +41,9 @@ second_forstart:
 	bne	$v0,$zero,second_forend		#go in to if or not
 	li	$v0,0		#return false
 	lw	$ra,0($sp)	#get the original return address
+	lw	$s0,4($sp)
+	lw	$s1,8($sp)
+	lw	$s2,12($sp)
 	addi	$sp,$sp,16	#return the space
 	jr	$ra
 second_forend:
@@ -55,6 +58,9 @@ second_forend:
 	move	$v0,$zero
 	addi	$v0,$v0,1	#make true
 	lw	$ra,0($sp)	#get the original return address
+	lw	$s0,4($sp)
+	lw	$s1,8($sp)
+	lw	$s2,12($sp)
 	addi	$sp,$sp,16	#return the space
 	jr	$ra
 
@@ -67,7 +73,7 @@ second_forend:
 ##       char c = '*';
 ##       if (has_single_bit_set(value)) {
 ##         int num = get_lowest_set_bit(value) + 1;
-##         c = symbollist[num];
+##         c = symbollist[num];lw	$s0,4($sp)	#save
 ##       }
 ##       putchar(c);
 ##     }
@@ -131,5 +137,11 @@ if_end:
 	move	$s1,$t0			#save i again
 	blt	$t0,16,first_first	#jump to the first loop
 	lw	$ra,0($sp)		#get the return address
+	lw	$s0,4($sp)	#save
+	lw	$s1,8($sp)	#save
+	lw	$s2,12($sp)	#save
+	lw	$s3,16($sp)	#save
+	lw	$s4,20($sp)	#save
+	lw	$s5,24($sp)	#save
 	addi	$sp,$sp,28		#return the space
 	jr	$ra			#finish
