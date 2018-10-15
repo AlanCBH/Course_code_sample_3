@@ -19,7 +19,7 @@ print_int_and_space:
 	li   	$a0, ' '       	# print a black space
 	li	$v0, PRINT_CHAR	# load the syscall option for printing chars
 	syscall			# print the char
-	
+
 	jr	$ra		# return to the calling procedure
 
 # main function ########################################################
@@ -35,29 +35,29 @@ main:
 	la	$t0, tree1
 	li	$t1, 1
 	sw	$t1, 4($t0)
-	
+
 	la	$t0, tree2
 	sw	$t1, 124($t0)
-	
+
 	la	$t0, tree3
 	sw	$t1, 28($t0)
 	sw	$t1, 256($t0)
 
- 	la	$a0, tree1     
+ 	la	$a0, tree1
 		li $a1, 1
 		li $a2, 1
 		jal	dfs
 		move	$a0, $v0
 		jal	print_int_and_space            # this should print 0
 
-  	la	$a0, tree2     
+  	la	$a0, tree2
 		li $a1, 1
 		li $a2, 1
 		jal	dfs
 		move	$a0, $v0
 		jal	print_int_and_space            # this should print 4
 
-  	la	$a0, tree3     
+  	la	$a0, tree3
 		li $a1, 1
 		li $a2, 1
 		jal	dfs
@@ -68,5 +68,3 @@ main:
 	lw	$ra, 0($sp)
 	add	$sp, $sp, 4
 	jr	$ra
-
-
