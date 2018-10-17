@@ -1,0 +1,18 @@
+Grades for version committed on time
+	board_done: 35.0 / 35
+			*Passed test: board_done("board1")
+			*Passed test: board_done("board2")
+			*Passed test: board_done("board3")
+			*Passed test: board_done("board4")
+			*Passed test: board_done("board5")
+		
+	print_board: 35.0 / 35
+			*Passed test: print_board("board1")
+			*Passed test: print_board("board2")
+			*Passed test: print_board("board3")
+			*Passed test: print_board("board4")
+			*Passed test: print_board("board5")
+		
+Total: 70.0 / 70
+
+Final Score: 70.0 / 70
