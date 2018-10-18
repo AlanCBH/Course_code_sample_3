@@ -6,6 +6,7 @@ PRINT_CHAR = 11
 	tree1:	.word	0:127
 	tree2:	.word	0:127
 	tree3:	.word	0:127
+	tree4:	.word	0:127
 .text
 
 # print int and space ##################################################
@@ -43,6 +44,10 @@ main:
 	sw	$t1, 28($t0)
 	sw	$t1, 256($t0)
 
+	la	$t0, tree4
+	sw	$t1, 124($t0)
+
+
  	la	$a0, tree1
 		li $a1, 1
 		li $a2, 1
@@ -63,6 +68,13 @@ main:
 		jal	dfs
 		move	$a0, $v0
 		jal	print_int_and_space            # this should print 6
+
+	la	$a0, tree4
+		li $a1, 1
+		li $a2, 1
+		jal	dfs
+		move	$a0, $v0
+		jal	print_int_and_space            # this should print 4
 
 
 	lw	$ra, 0($sp)
