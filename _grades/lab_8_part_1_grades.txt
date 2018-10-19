@@ -1,0 +1,18 @@
+Grades for version committed on time
+	dfs: 25.0 / 25
+		p1.s: warning: $sp was modified 6 times. Modifying $sp more than at the beginning and end of a function is error prone.
+		p1.s: warning: Found 5 instances of jr $ra. Using multiple return points is error prone. Consider merging return points into a single label.
+			*Passed test: dfs("tree1")
+			*Passed test: dfs("tree1") (evil)
+			*Passed test: dfs("tree2")
+			*Passed test: dfs("tree2") (evil)
+			*Passed test: dfs("tree3")
+			*Passed test: dfs("tree3") (evil)
+			*Passed test: dfs("tree4")
+			*Passed test: dfs("tree4") (evil)
+			*Passed test: dfs("tree5")
+			*Passed test: dfs("tree5") (evil)
+		
+Total: 25.0 / 25
+
+Final Score: 25.0 / 25
