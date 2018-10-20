@@ -9,35 +9,32 @@ get_square_begin:
 # (feel free to copy over the solution afterwards)
 .globl has_single_bit_set
 has_single_bit_set:
-	bne 	$a0,$zero,sec_if    	#first if value == 0
-	move 	$v0,$zero		#set return value to 0
-	jr 	$ra			#return
-sec_if:
-	addi 	$t0,$a0,-1		#get value-1
-	and	$t1,$a0,$t0		#compare if
-	beq 	$t1,0,end		#into the if or not
-	move	$v0,$zero		#set return to 0 and return
+	beq	$a0, 0, hsbs_ret_zero	# return 0 if value == 0
+	sub	$a1, $a0, 1
+	and	$a1, $a0, $a1
+	bne	$a1, 0, hsbs_ret_zero	# return 0 if (value & (value - 1)) == 0
+	li	$v0, 1
 	jr	$ra
-end:
-	li	$v0,1			#set return to 1
+hsbs_ret_zero:
+	li	$v0, 0
 	jr	$ra
-
 
 # UNTIL THE SOLUTIONS ARE RELEASED, YOU SHOULD COPY OVER YOUR VERSION FROM LAB 7
 # (feel free to copy over the solution afterwards)
+.globl get_lowest_set_bit
 get_lowest_set_bit:
-	li	$t0,0			#load 0 to i
-	li	$t1,1			#have an one
-for_loop_start:
-	sllv	$t2,$t1,$t0		#get 1<<i
-	and	$t3,$t2,$a0		#compare value and 1<<i
-	beq	$t3,$zero,for_loop_end	#jump or not
-	move	$v0,$t0			#set return value
-	jr	$ra
-for_loop_end:
-	addi 	$t0,$t0,1		#i++
-	blt	$t0,16,for_loop_start	#i < 16
-	move	$v0,$zero		#set return value to 0
+	li	$v0, 0			# i
+	li	$t1, 1
+
+glsb_loop:
+	sll	$t2, $t1, $v0		# (1 << i)
+	and	$t2, $t2, $a0		# (value & (1 << i))
+	bne	$t2, $0, glsb_done
+	add	$v0, $v0, 1
+	blt	$v0, 16, glsb_loop	# repeat if (i < 16)
+
+	li	$v0, 0			# return 0
+glsb_done:
 	jr	$ra
 
 
@@ -45,65 +42,55 @@ for_loop_end:
 # (feel free to copy over the solution afterwards)
 .globl print_board
 print_board:
-	sub	$sp,$sp,28
-	sw	$ra,0($sp)	#save return address
-	sw	$s0,4($sp)	#save
-	sw	$s1,8($sp)	#save
-	sw	$s2,12($sp)	#save
-	sw	$s3,16($sp)	#save
-	sw	$s4,20($sp)	#save
-	sw	$s5,24($sp)	#save
-	la	$t2,symbollist	#get the address of symbollist
-	li	$t0,0		#i = 0
-	move	$s0,$a0		#save original address
-	move	$s1,$t0		#save i
-	move 	$s3,$t2		#save symbollist address
-first_first:
-	li	$t1,0		#j = 0
-	move	$s2,$t1		#save j
-sec_first:
-	move	$t0,$s1			#get i
-	mul	$t3,$t0,16		#i*N
-	move 	$t1,$s2			#get j
-	add	$t3,$t3,$t1		#i*N+j
-	mul	$t3,$t3,2		#(i*N+j)*sizeof short
-	add	$a0,$t3,$a0		#a0+address
-	li	$t5,'*'			#char c = '*'
-	move	$s4,$t5			#save c
-	lhu	$a0,0($a0)		#get the value in $a0
-	move	$s5,$a0			#save value
-	jal	has_single_bit_set	#call function
-	bne	$v0,1,if_end		#go into if or not
-	move	$a0,$s5			#get value
-	jal	get_lowest_set_bit	#call other function
-	addi	$t6,$v0,1		#num = get_lowest_set_bit+1
-	move	$t2,$s3			#get the address of symbollist
-	add	$t6,$t6,$t2		#get the address of symbollist[num]
-	lb	$t5,0($t6)		#c = symbollist[num]
-	move	$s4,$t5			#save c again
-if_end:
-	move	$a0,$s4			#putchar('c')
-	li	$v0,11			#putchar('c')
-	syscall				#putchar('c')
-	move	$a0,$s0			#rewrite the address to a0
-	move	$t1,$s2			#get original j
-	addi	$t1,$t1,1		#++j
-	move	$s2,$t1			#save j again
-	blt	$t1,16,sec_first	#jump to the second loop
-	li	$a0,'\n'		#putchar('\n')
-	li	$v0,11			#putchar('\n')
-	syscall				#putchar('\n')
-	move	$a0,$s0			#rewrite the address to a0
-	move 	$t0,$s1			#get original i
-	addi	$t0,$t0,1		#++i
-	move	$s1,$t0			#save i again
-	blt	$t0,16,first_first	#jump to the first loop
-	lw	$ra,0($sp)		#get the return address
-	lw	$s0,4($sp)	#save
-	lw	$s1,8($sp)	#save
-	lw	$s2,12($sp)	#save
-	lw	$s3,16($sp)	#save
-	lw	$s4,20($sp)	#save
-	lw	$s5,24($sp)	#save
-	addi	$sp,$sp,28		#return the space
-	jr	$ra			#finish
+	sub	$sp, $sp, 20
+	sw	$ra, 0($sp)		# save $ra and free up 4 $s registers for
+	sw	$s0, 4($sp)		# i
+	sw	$s1, 8($sp)		# j
+	sw	$s2, 12($sp)		# the function argument
+	sw	$s3, 16($sp)		# the computed pointer (which is used for 2 calls)
+	move	$s2, $a0
+
+	li	$s0, 0			# i
+pb_loop1:
+	li	$s1, 0			# j
+pb_loop2:
+	mul	$t0, $s0, 16		# i*16
+	add	$t0, $t0, $s1		# (i*16)+j
+	sll	$t0, $t0, 1		# ((i*16)+j)*2
+	add	$s3, $s2, $t0
+	lhu	$a0, 0($s3)
+	jal	has_single_bit_set
+	beq	$v0, 0, pb_star		# if it has more than one bit set, jump
+	lhu	$a0, 0($s3)
+	jal	get_lowest_set_bit	#
+	add	$v0, $v0, 1		# $v0 = num
+	la	$t0, symbollist
+	add	$a0, $v0, $t0		# &symbollist[num]
+	lb	$a0, 0($a0)		#  symbollist[num]
+	li	$v0, 11
+	syscall
+	j	pb_cont
+
+pb_star:
+	li	$v0, 11			# print a "*"
+	li	$a0, '*'
+	syscall
+
+pb_cont:
+	add	$s1, $s1, 1		# j++
+	blt	$s1, 16, pb_loop2
+
+	li	$v0, 11			# at the end of a line, print a newline char.
+	li	$a0, '\n'
+	syscall
+
+	add	$s0, $s0, 1		# i++
+	blt	$s0, 16, pb_loop1
+
+	lw	$ra, 0($sp)		# restore registers and return
+	lw	$s0, 4($sp)
+	lw	$s1, 8($sp)
+	lw	$s2, 12($sp)
+	lw	$s3, 16($sp)
+	add	$sp, $sp, 20
+	jr	$ra

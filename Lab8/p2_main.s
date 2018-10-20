@@ -118,7 +118,7 @@ print_int_and_space:
 	li   	$a0, 32        	# print a black space (ASCII 32)
 	li	$v0, PRINT_CHAR	# load the syscall option for printing chars
 	syscall			# print the char
-	
+
 	jr	$ra		# return to the calling procedure
 
 # print newline ########################################################
@@ -128,7 +128,7 @@ print_int_and_space:
 print_newline:
 	li	$v0, 4			# at the end of a line, print a newline char.
 	la	$a0, newline
-	syscall	
+	syscall
 	jr	$ra
 
 # main function ########################################################
@@ -146,24 +146,24 @@ main:
 
  	la	$a0, missing_column_board  # full board missing 1 column
  	jal	rule1
- 	la	$a0, missing_column_board     
+ 	la	$a0, missing_column_board
  	jal	print_board                # all "*" should be removed
- 	
+
  	jal     print_newline
- 
-##  	la	$a0, missing_row_board     # full board missing 1 row
-##  	jal	rule1
-##  	la	$a0, missing_row_board     
-##  	jal	print_board                # all "*" should be removed
-## 
-## 	jal     print_newline
-## 
-##  	la	$a0, missing_in_square_board # board with 4 big squares each missing 1 entry
-##  	jal	rule1
-##  	la	$a0, missing_in_square_board     
-##  	jal	print_board                # all "*" should be removed
-## 
-## 	jal     print_newline
+
+ 	la	$a0, missing_row_board     # full board missing 1 row
+ 	jal	rule1
+ 	la	$a0, missing_row_board
+ 	jal	print_board                # all "*" should be removed
+
+	jal     print_newline
+
+ 	la	$a0, missing_in_square_board # board with 4 big squares each missing 1 entry
+ 	jal	rule1
+ 	la	$a0, missing_in_square_board
+ 	jal	print_board                # all "*" should be removed
+
+	jal     print_newline
 
 board1_solve:
 ##  	la	$a0, board1                # board with 4 big squares each missing 1 entry
@@ -176,5 +176,3 @@ board1_solve:
 	lw	$ra, 0($sp)
 	add	$sp, $sp, 4
 	jr	$ra
-
-
