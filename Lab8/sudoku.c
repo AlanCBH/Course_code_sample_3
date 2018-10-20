@@ -7,7 +7,7 @@ const int ALL_VALUES = (1 << GRID_SQUARED) - 1;
 const char symbollist[] = "0123456789ABCDEFG";
 
 bool has_single_bit_set(unsigned value) {  // returns 1 if a single bit is set
-  if (value == 0) {  
+  if (value == 0) {
     return 0;   // has no bits set
   }
   if (value & (value - 1)) {
@@ -161,7 +161,7 @@ rule2(unsigned short board[GRID_SQUARED][GRID_SQUARED]) {
       if (has_single_bit_set(value)) {
         continue;
       }
-      
+
       int jsum = 0, isum = 0;
       for (int k = 0 ; k < GRID_SQUARED ; ++ k) {
         if (k != j) {
@@ -197,7 +197,7 @@ rule2(unsigned short board[GRID_SQUARED][GRID_SQUARED]) {
       if (ALL_VALUES != sum) {
         board[i][j] = ALL_VALUES & ~sum;
         changed = true;
-      } 
+      }
     }
   }
   return changed;
@@ -215,7 +215,7 @@ board_failed(unsigned short board[GRID_SQUARED][GRID_SQUARED]) {
   return false;
 }
 
-bool 
+bool
 solve(unsigned short board[GRID_SQUARED][GRID_SQUARED]) {
   bool changed;
   do {
