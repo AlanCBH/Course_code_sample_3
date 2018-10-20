@@ -61,6 +61,7 @@ rule1:
 	move	$s3,$t0		#save i
 	move	$s4,$t1		#save j
 	li	$v0,0		#set changed to false
+	move 	$s2,$v0		#save return 
 	li	$t0,0		#i = 0
 	move	$s3,$t0		#save i
 jr_back1:
@@ -129,105 +130,105 @@ endloop3:
 #	unused s1,s6,s7
 #	unused t6,t7,t8,t9
 	#s3 for i,s4 for j, s5 for value,s0 for original a0
-	move    $a0,$s4
-	jal  	get_square_begin	#get_square_begin(j)
-	sw 	$s6,28($sp)		#save jj
-	move 	$s6,$v0
-	move 	$a0,$s3
-	jal 	get_square_begin	#get_square_begin(i)
-	sw 	$s7,32($sp)
-	move 	$s7,$v0			#save ii
-	move 	$a0,$s0
-##############################################################
-	move 	$t6,$s7			#k =ii
-iistarts:
-	addi 	$t7,$s7,4		#ii+GRIDSIZE
-	bge 	$t6,$t7,if_ends
-	move 	$t8,$s6       		#l = jj
-llstarts:
-	addi 	$t7,$s6,4		#jj+GRIDSIZE
-	bge 	$t8,$t7,jjends
-	bne 	$t6,$s3,conend
-	bne 	$t8,$s4,conend
-	j       llends
-conend:
-	#########################################
-	mul	$t7,$t6,16
-	add 	$t7,$t7,$t8
-	mul 	$t7,$t7,2
-	add 	$t7,$t7,$s0
-	lhu 	$t7,0($t7)
-	and 	$t7,$t7,$s5
-	beq 	$s5,$zero,klends
-	# ########################
-	 not 	$t9,$s5
-
-	 mul	$t7,$t6,16
-	 add 	$t7,$t7,$t8
-	 mul 	$t7,$t7,2
-	 add 	$t7,$t7,$s0
-	 lhu 	$t7,0($t7)
-
-	 and	$t9,$t7,$t9
-
-	 mul	$t7,$t6,16
-	 add 	$t7,$t7,$t8
-	 mul 	$t7,$t7,2
-	 add 	$t7,$t7,$s0
-
-	 sh 	$t9,0($t7)
-	 li 	$v0,1
-	 move 	$s2,$v0
-	# ########################
-klends:
-	#########################################
-llends:
-	addi 	$t8,$t8,1		#l++
-	j 	llstarts
-jjends:
-	addi 	$t6,$t6,1		#k++
-	j 	iistarts		#jump back
-
-	#move	$a0,$s3			#set i
-# 	jal	get_square_begin	#get_square_begin(i)
-# 	move	$s1,$v0			#save ii
-# 	move	$a0,$s4			#set j
-# 	jal	get_square_begin	#get_square_begin(j)
-# 	move	$s6,$v0			#save jj
-# 	move 	$a0,$s0			#get original a0
-# 	move	$t7,$s1			#k = ii
+# 	move    $a0,$s4
+# 	jal  	get_square_begin	#get_square_begin(j)
+# 	sw 	$s6,28($sp)		#save jj
+# 	move 	$s6,$v0
+# 	move 	$a0,$s3
+# 	jal 	get_square_begin	#get_square_begin(i)
+# 	sw 	$s7,32($sp)
+# 	move 	$s7,$v0			#save ii
+# 	move 	$a0,$s0
+# ##############################################################
+# 	move 	$t6,$s7			#k =ii
+# iistarts:
+# 	addi 	$t7,$s7,4		#ii+GRIDSIZE
+# 	bge 	$t6,$t7,if_ends
+# 	move 	$t8,$s6       		#l = jj
+# llstarts:
+# 	addi 	$t7,$s6,4		#jj+GRIDSIZE
+# 	bge 	$t8,$t7,jjends
+# 	bne 	$t6,$s3,conend
+# 	bne 	$t8,$s4,conend
+# 	j       llends
+# conend:
+# 	#########################################
+# 	mul	$t7,$t6,16
+# 	add 	$t7,$t7,$t8
+# 	mul 	$t7,$t7,2
+# 	add 	$t7,$t7,$s0
+# 	lhu 	$t7,0($t7)
+# 	and 	$t7,$t7,$s5
+# 	beq 	$s5,$zero,klends
+# 	# ########################
+# 	 not 	$t9,$s5
 #
-# jr_back4:
-# 	addi	$t5,$s1,4		#get ii+GRIDSIZE
-# 	bge	$t7,$t5,if_ends		#jump outside the firstloop
-# 	move	$t9,$s6			#l = jj
-# jr_back5:
-# 	addi	$t6,$s6,4		#get jj+GRIDSIZE
-# 	bge	$t9,$t6,endloop5	#jump outside the secondloop
-# 	bne	$t7,$s3,conifend	#k==i
-# 	bne 	$t9,$s4,conifend	#l==j
-# 	j	ifklends		#continue
-# conifend:
-# 	mul	$t8,$t7,16		#k*16
-# 	add	$t8,$t8,$t9		#k*16+l
-# 	mul	$t8,$t8,2		#get the address of board[k][l]
-# 	move 	$a0,$s0			#get address of a0
-# 	add 	$t8,$t8,$a0		#get the address
-# 	lhu	$t6,0($t8)		#get the data of board[k][l]
-# 	and	$t6,$t6,$s5		#board[k][l] & value
-# 	beq	$t6,$zero,ifklends	#into the if or not
-# 	lhu	$t6,0($t8)		#get the data of board[k][l]
-# 	not	$t5,$s5			#get ~value
-# 	and	$t6,$t6,$t5		#get board[k][l] & ~value
-# 	sh	$t6,0($t8)		#board[k][l] &= ~value
-# 	li	$v0,1			#set changed to true
-# 	move	$s2,$v0			#save v0
-# ifklends:
-# 	addi	$t9,$t9,1		#++l
-# 	j	jr_back5		#jump back
-# endloop5:
-# 	addi	$t7,$t7,1		#++k
-# 	j	jr_back4		#jump back
+# 	 mul	$t7,$t6,16
+# 	 add 	$t7,$t7,$t8
+# 	 mul 	$t7,$t7,2
+# 	 add 	$t7,$t7,$s0
+# 	 lhu 	$t7,0($t7)
+#
+# 	 and	$t9,$t7,$t9
+#
+# 	 mul	$t7,$t6,16
+# 	 add 	$t7,$t7,$t8
+# 	 mul 	$t7,$t7,2
+# 	 add 	$t7,$t7,$s0
+#
+# 	 sh 	$t9,0($t7)
+# 	 li 	$v0,1
+# 	 move 	$s2,$v0
+# 	# ########################
+# klends:
+# 	#########################################
+# llends:
+# 	addi 	$t8,$t8,1		#l++
+# 	j 	llstarts
+# jjends:
+# 	addi 	$t6,$t6,1		#k++
+# 	j 	iistarts		#jump back
+
+	move	$a0,$s3			#set i
+	jal	get_square_begin	#get_square_begin(i)
+	move	$s1,$v0			#save ii
+	move	$a0,$s4			#set j
+	jal	get_square_begin	#get_square_begin(j)
+	move	$s6,$v0			#save jj
+	move 	$a0,$s0			#get original a0
+	move	$t7,$s1			#k = ii
+
+jr_back4:
+	addi	$t5,$s1,4		#get ii+GRIDSIZE
+	bge	$t7,$t5,if_ends		#jump outside the firstloop
+	move	$t9,$s6			#l = jj
+jr_back5:
+	addi	$t6,$s6,4		#get jj+GRIDSIZE
+	bge	$t9,$t6,endloop5	#jump outside the secondloop
+	bne	$t7,$s3,conifend	#k==i
+	bne 	$t9,$s4,conifend	#l==j
+	j	ifklends		#continue
+conifend:
+	mul	$t8,$t7,16		#k*16
+	add	$t8,$t8,$t9		#k*16+l
+	mul	$t8,$t8,2		#get the address of board[k][l]
+	move 	$a0,$s0			#get address of a0
+	add 	$t8,$t8,$a0		#get the address
+	lhu	$t6,0($t8)		#get the data of board[k][l]
+	and	$t6,$t6,$s5		#board[k][l] & value
+	beq	$t6,$zero,ifklends	#into the if or not
+	lhu	$t6,0($t8)		#get the data of board[k][l]
+	not	$t5,$s5			#get ~value
+	and	$t6,$t6,$t5		#get board[k][l] & ~value
+	sh	$t6,0($t8)		#board[k][l] &= ~value
+	li	$v0,1			#set changed to true
+	move	$s2,$v0			#save v0
+ifklends:
+	addi	$t9,$t9,1		#++l
+	j	jr_back5		#jump back
+endloop5:
+	addi	$t7,$t7,1		#++k
+	j	jr_back4		#jump back
 
 ########################################################
 if_ends:
