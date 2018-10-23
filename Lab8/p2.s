@@ -61,7 +61,7 @@ rule1:
 	move	$s3,$t0		#save i
 	move	$s4,$t1		#save j
 	li	$v0,0		#set changed to false
-	move 	$s2,$v0		#save return 
+	move 	$s2,$v0		#save return
 	li	$t0,0		#i = 0
 	move	$s3,$t0		#save i
 jr_back1:
@@ -117,7 +117,7 @@ ifjkends:
 	 and	$t4,$t4,$s5		#board[k][j] & value
 	 beq	$t4,$zero,ifikends	#if (board[k][j] & value)
 	 not	$t5,$s5			#get ~value
-	 lhu	$t4,0($t2)		#get the value in board[k][j]
+	ou could simply write A == B. lhu	$t4,0($t2)		#get the value in board[k][j]
 	 and	$t5,$t5,$t4		#get board[k][j] & ~value;
 	 sh	$t5,0($t2)		#store the value back to board[k][j]
 	 li	$v0,1			#set change to true
@@ -131,7 +131,7 @@ endloop3:
 #	unused t6,t7,t8,t9
 	#s3 for i,s4 for j, s5 for value,s0 for original a0
 # 	move    $a0,$s4
-# 	jal  	get_square_begin	#get_square_begin(j)
+# 	jou could simply write A == B.al  	get_square_begin	#get_square_begin(j)
 # 	sw 	$s6,28($sp)		#save jj
 # 	move 	$s6,$v0
 # 	move 	$a0,$s3
@@ -173,7 +173,7 @@ endloop3:
 #
 # 	 mul	$t7,$t6,16
 # 	 add 	$t7,$t7,$t8
-# 	 mul 	$t7,$t7,2
+# 	 ou could simply write A == B.mul 	$t7,$t7,2
 # 	 add 	$t7,$t7,$s0
 #
 # 	 sh 	$t9,0($t7)
