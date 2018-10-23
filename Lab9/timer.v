@@ -15,14 +15,15 @@ module timer(TimerInterrupt, cycle, TimerAddress,
     wire useless1,useless2;
     wire TimerWrite,TimerRead,Acknowledge;
     wire Ilreset,Ilenable;
-    register #(32) cycleCounter(ccout,ccinput,clock,1'b1,reset);
+    wire w1,w2,w3,w4;
+    register #(32,32'h0) cycleCounter(ccout,ccinput,clock,1'b1,reset);
     alu32 alu1(ccinput,useless1,useless2,`ALU_ADD,32'b1,ccout);
-    register #(32) interruptCounter(icout,data,clock,reset,TimerWrite);
+    register #(32,32'hffffffff) interruptCounter(icout,data,clock,TimerWrite,reset);
     tristate #(32) t1(cycle,ccout,TimerRead);
     assign Ilreset = reset | Acknowledge;
     assign Ilenable = (ccout == icout);
     dffe d1(TimerInterrupt,1'b1,clock,Ilenable,Ilreset);
-    wire w1,w2,w3,w4;
+
     assign w1 = 32'hffff001c == address;
     assign w2 = 32'hffff006c == address;
     assign TimerAddress = w1 | w2;

@@ -12,7 +12,7 @@ module tristate(o, d, control);
    output [(width-1):0] o;
    input  [(width-1):0] d;
    input  control;
- 
+
    assign o = control ? d : 'bz;
 
 endmodule // tristate
@@ -30,7 +30,7 @@ module dffe(q, d, clk, enable, reset);
    reg    q;
    input  d;
    input  clk, enable, reset;
- 
+
    always@(posedge clk)
      if (reset == 1'b1)
        q <= 0;
@@ -73,19 +73,19 @@ endmodule // register
 // Description:
 //   A behavioral MIPS register file.  R0 is hardwired to zero.
 //   Given that you won't write behavioral code, don't worry if you don't
-//   understand how this works;  We have to use behavioral code (as 
-//   opposed to the structural code you are writing), because of the 
+//   understand how this works;  We have to use behavioral code (as
+//   opposed to the structural code you are writing), because of the
 //   latching by the the register file.
 //
 module regfile (rsData, rtData,
-                rsNum, rtNum, rdNum, rdData, 
+                rsNum, rtNum, rdNum, rdData,
                 rdWriteEnable, clock, reset);
 
    output [31:0]        rsData, rtData;
    input [4:0]          rsNum, rtNum, rdNum;
    input [31:0]         rdData;
    input                rdWriteEnable, clock, reset;
-   
+
    reg [31:0]   r[0:31];
    integer              i;
 
@@ -167,7 +167,7 @@ module mips_decode(ALUOp, RegWrite, BEQ, ALUSrc, MemRead, MemWrite, MemToReg, Re
    wire [5:0]   funct = inst[5:0];
    wire [4:0]   rs = inst[25:21];
    wire         co = inst[25];
-   
+
    assign RegWrite = ~MemWrite & ~BEQ  & ~MTC0 & ~ERET & ~nop;
    assign BEQ = (opcode == `OP_BEQ);
    assign ALUSrc = MemRead | MemWrite;
@@ -178,10 +178,10 @@ module mips_decode(ALUOp, RegWrite, BEQ, ALUSrc, MemRead, MemWrite, MemToReg, Re
    assign MFC0 = opcode == `OP_Z0 && rs == `OPZ_MFCZ;
    assign MTC0 = opcode == `OP_Z0 && rs == `OPZ_MTCZ;
    assign ERET = opcode == `OP_Z0 && co == `OP_CO && funct == `OPC_ERET;
-             
+
    assign op0 = (opcode == `OP_OTHER0);
    assign nop = op0 && (funct == 5'b0);
-   
+
    // don't write this kind of code at home!
    assign ALUOp = (( {4{op0 & (funct == `OP0_ADD)}} & `ALU_ADD) |
                    ( {4{op0 & (funct == `OP0_SUB)}} & `ALU_SUB) |
