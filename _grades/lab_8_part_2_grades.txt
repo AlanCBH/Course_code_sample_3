@@ -1,0 +1,56 @@
+Grades for version committed on time
+	rule1: 0.0 / 75
+			*Failed test: rule1(board1)
+				*Error running test: 
+					spim: (parser) syntax error on line 120 of file working_repos/binghui2/Lab8/p2.s
+						  	ou could simply write A == B. lhu	$t4,0($t2)		#get the value in board[k][j]
+						      ^
+			*Failed test: rule1(board2)
+				*Error running test: 
+					spim: (parser) syntax error on line 120 of file working_repos/binghui2/Lab8/p2.s
+						  	ou could simply write A == B. lhu	$t4,0($t2)		#get the value in board[k][j]
+						      ^
+			*Failed test: rule1("board3")
+				*Error running test: 
+					spim: (parser) syntax error on line 120 of file working_repos/binghui2/Lab8/p2.s
+						  	ou could simply write A == B. lhu	$t4,0($t2)		#get the value in board[k][j]
+						      ^
+			*Failed test: rule1("board4")
+				*Error running test: 
+					spim: (parser) syntax error on line 120 of file working_repos/binghui2/Lab8/p2.s
+						  	ou could simply write A == B. lhu	$t4,0($t2)		#get the value in board[k][j]
+						      ^
+			*Failed test: rule1("board5")
+				*Error running test: 
+					spim: (parser) syntax error on line 120 of file working_repos/binghui2/Lab8/p2.s
+						  	ou could simply write A == B. lhu	$t4,0($t2)		#get the value in board[k][j]
+						      ^
+			*Failed test: rule1("board6")
+				*Error running test: 
+					spim: (parser) syntax error on line 120 of file working_repos/binghui2/Lab8/p2.s
+						  	ou could simply write A == B. lhu	$t4,0($t2)		#get the value in board[k][j]
+						      ^
+			*Failed test: rule1("board7")
+				*Error running test: 
+					spim: (parser) syntax error on line 120 of file working_repos/binghui2/Lab8/p2.s
+						  	ou could simply write A == B. lhu	$t4,0($t2)		#get the value in board[k][j]
+						      ^
+			*Failed test: rule1("board8")
+				*Error running test: 
+					spim: (parser) syntax error on line 120 of file working_repos/binghui2/Lab8/p2.s
+						  	ou could simply write A == B. lhu	$t4,0($t2)		#get the value in board[k][j]
+						      ^
+			*Failed test: rule1("board9")
+				*Error running test: 
+					spim: (parser) syntax error on line 120 of file working_repos/binghui2/Lab8/p2.s
+						  	ou could simply write A == B. lhu	$t4,0($t2)		#get the value in board[k][j]
+						      ^
+			*Failed test: rule1("board10")
+				*Error running test: 
+					spim: (parser) syntax error on line 120 of file working_repos/binghui2/Lab8/p2.s
+						  	ou could simply write A == B. lhu	$t4,0($t2)		#get the value in board[k][j]
+						      ^
+		
+Total: 0.0 / 75
+
+Final Score: 0.0 / 75
