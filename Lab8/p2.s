@@ -117,7 +117,7 @@ ifjkends:
 	 and	$t4,$t4,$s5		#board[k][j] & value
 	 beq	$t4,$zero,ifikends	#if (board[k][j] & value)
 	 not	$t5,$s5			#get ~value
-	ou could simply write A == B. lhu	$t4,0($t2)		#get the value in board[k][j]
+	 lhu	$t4,0($t2)		#get the value in board[k][j]
 	 and	$t5,$t5,$t4		#get board[k][j] & ~value;
 	 sh	$t5,0($t2)		#store the value back to board[k][j]
 	 li	$v0,1			#set change to true
