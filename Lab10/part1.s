@@ -38,6 +38,45 @@ REQUEST_PUZZLE_ACK      = 0xffff00d8
 .text
 main:
 	#Fill in your code here
+    li      $t4,0x8000          #enable interrupts
+    or      $t4,$t4,0x1000      #timer interrupt enable bit
+    or      $t4,$t4,1           #bonk interrupt bit
+    mtc0    $t4,$12             #set interrupt mask
+    ################################################
+    #sw      $zero,ANGLE_CONTROL($zero)     #set to relative
+    #li      $t0,1                          #set VELOCITY
+    #sw      $t0,VELOCITY($zero)            #set VELOCITY
+    li      $t2,0                           #set previous state
+ judge:
+    # sw      $zero,VELOCITY($zero)
+    lw      $t1,RIGHT_WALL_SENSOR($zero)   #walls on the right
+    not     $t3,$t1                        #current is 0
+    and     $t3,$t3,$t2                    #previous is 1
+    move    $t2,$t1                        #move the current state to previous
+
+    beq     $t3,1,turn
+going_straight:
+    # lw      $t1,0xffff1018($zero)       #get the current score
+    # li      $t3,100                     #max score
+    # beq     $t1,$t0,endmaze             #if you are in the center, stop going.
+    # lw      $v0,TIMER($zero)              #stop every 10 cycles
+    # add     $v0,$v0,1                     #
+    # sw      $v0,TIMER($zero)               #
+
+    li      $t0,10                          #drive again
+    sw      $t0,VELOCITY($zero)            #
+    #j       going_straight
+     j       judge
+    #############################################
+ turn:
+
+     li      $t0,90                      #rotato 90 degrees
+     sw      $t0,ANGLE($zero)       #rotate to right
+     sw      $zero,ANGLE_CONTROL($zero)     #set to relative
+     #li      $t0,1                          #drive again
+
+     j       judge
+endmaze:
     jr      $ra                         #ret
 
 .kdata
@@ -81,11 +120,29 @@ interrupt_dispatch:            # Interrupt:
 
 bonk_interrupt:
     #Fill in your code here
+    sub     $sp,$sp,8                   #stack space
+    sw      $t0,0($sp)                  #save t0
+    sw      $v0,4($sp)
+    sw      $a1, BONK_ACK($zero)      #acknowledge interrupt
+
+
+    li      $t0,180                     #rotato 180 degrees
+    sw      $t0,ANGLE($zero)            #rotate 180 degrees
+    sw      $zero,ANGLE_CONTROL($zero)    #rotate relative ANGLE
+    sw      $zero,VELOCITY($zero)        #set speed to zero
+ 
+
+    lw      $t0,0($sp)                  #load t0 back\
+    lw      $v0,4($sp)
+
+    addi    $sp,$sp,8                   #add stack space back
     j       interrupt_dispatch    # see if other interrupts are waiting
 
 timer_interrupt:
     #Fill in your code here
-    j        interrupt_dispatch    # see if other interrupts are waiting
+    sw       $a1,TIMER_ACK($zero)    #acknowledge interrupt
+    j        interrupt_dispatch
+
 
 non_intrpt:                # was some non-interrupt
     li        $v0, PRINT_STRING
@@ -105,6 +162,3 @@ done:
     move    $at, $k1        # Restore $at
 .set at
     eret
-
-
-
