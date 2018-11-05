@@ -292,7 +292,7 @@ pick:
 
 
         lw      $ra,0($sp)                  #get the correct return addr
-        addi    $sp,$sp,4                   #return the addr allocated
+        addi    $sp,$sp,8                   #return the addr allocated
         jr  $ra
 
 
