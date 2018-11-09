@@ -7,7 +7,7 @@ array:	.word	1	255	1024	100	200
 # our pipelined machine.
 
 .text
-main:   
+main:
 	lw	$2,  0($20)		# $2 = 1	(0x1)
 	lw	$3,  4($20)		# $3 = 255	(0xff)
 	lw	$4,  8($20)		# $4 = 1024	(0x400)
@@ -17,14 +17,14 @@ main:
 	add	$7, $2, $2		# $7 = 2	(0x2)
 	add	$8, $4, $3		# $8 = 1279	(0x4ff)
 
-	sub	$9, $5, $0		# $9 = 100 	(0x64) 
+	sub	$9, $5, $0		# $9 = 100 	(0x64)
 	and	$10, $4, $3		# $10 = 0 	(0x0)
 
 	beq	$9, $5, skip_adds	# below two instructions should never execute
 
 	add	$9, $2, $7		# $9 = 3	(0x3)
 	add	$10, $2, $8		# $10 = 1280	(0x500)
-	
+
 skip_adds:
 	or	$11, $5, $6		# $11 = 236	(0xec)
 	slt	$12, $7, $8		# $12 = 1 	(0x1)
