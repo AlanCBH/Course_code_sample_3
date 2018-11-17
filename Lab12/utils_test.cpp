@@ -4,11 +4,11 @@
 TEST(Utils, Extract) {
   CacheConfig config(524288, 256, 8);
   unsigned address = 0xdeadbeef;
-  EXPECT_PRED_FORMAT2(AssertHexEquality, 0xef, 
+  EXPECT_PRED_FORMAT2(AssertHexEquality, 0xef,
     extract_block_offset(address, config));
-  EXPECT_PRED_FORMAT2(AssertHexEquality, 0xbe, 
+  EXPECT_PRED_FORMAT2(AssertHexEquality, 0xbe,
     extract_index(address, config));
-  EXPECT_PRED_FORMAT2(AssertHexEquality, 0xdead, 
+  EXPECT_PRED_FORMAT2(AssertHexEquality, 0xdead,
     extract_tag(address, config));
 }
 
