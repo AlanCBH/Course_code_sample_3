@@ -19,12 +19,12 @@ using std::min;
 // }
 void
 transpose_tiled(int **src, int **dest) {
-    for (int i = 0; i < SIZE-3; i += 4) {
-        for (int j = 0; j < SIZE-3; j += 4) {
+    for (int i = 0; i < SIZE-10; i += 11) {
+        for (int j = 0; j < SIZE-10; j += 11) {
 
 
-                for (int m = 0; m < 4; m++) {
-                        for (int n = 0; n < 4; n++) {
+                for (int m = 0; m < 11; m++) {
+                        for (int n = 0; n < 11; n++) {
                                 int temp = src[i+m][j+n];
                                 dest[j+n][i+m] = temp;
                         }
@@ -37,7 +37,7 @@ transpose_tiled(int **src, int **dest) {
         }
     }
     for (int i = 0; i < SIZE; i++) {
-            for (int j = 1; j < 4; j++) {
+            for (int j = 1; j < 11; j++) {
             dest[i][SIZE-j] = src[SIZE-j][i];
             dest[SIZE-j][i] = src[i][SIZE-j];
         }
