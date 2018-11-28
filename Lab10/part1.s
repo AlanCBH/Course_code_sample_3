@@ -43,9 +43,6 @@ main:
     or      $t4,$t4,1           #bonk interrupt bit
     mtc0    $t4,$12             #set interrupt mask
     ################################################
-    #sw      $zero,ANGLE_CONTROL($zero)     #set to relative
-    #li      $t0,1                          #set VELOCITY
-    #sw      $t0,VELOCITY($zero)            #set VELOCITY
     li      $t2,0                           #set previous state
  judge:
     # sw      $zero,VELOCITY($zero)
@@ -56,16 +53,9 @@ main:
 
     beq     $t3,1,turn
 going_straight:
-    # lw      $t1,0xffff1018($zero)       #get the current score
-    # li      $t3,100                     #max score
-    # beq     $t1,$t0,endmaze             #if you are in the center, stop going.
-    # lw      $v0,TIMER($zero)              #stop every 10 cycles
-    # add     $v0,$v0,1                     #
-    # sw      $v0,TIMER($zero)               #
 
     li      $t0,10                          #drive again
     sw      $t0,VELOCITY($zero)            #
-    #j       going_straight
      j       judge
     #############################################
  turn:
@@ -130,7 +120,7 @@ bonk_interrupt:
     sw      $t0,ANGLE($zero)            #rotate 180 degrees
     sw      $zero,ANGLE_CONTROL($zero)    #rotate relative ANGLE
     sw      $zero,VELOCITY($zero)        #set speed to zero
- 
+
 
     lw      $t0,0($sp)                  #load t0 back\
     lw      $v0,4($sp)
