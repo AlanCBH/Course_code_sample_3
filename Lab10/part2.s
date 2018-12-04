@@ -47,7 +47,7 @@ REQUEST_PUZZLE_ACK      = 0xffff00d8
 
 .data
 #REQUEST_PUZZLE returns an int array of length 128
-PUZZLE_ADDR:    .space 512
+PUZZLE_ADDR:    .word 0:128
 MAP_ADDR:       .word 101
 #0 puzzle_solve 1=n 2=s 3=w 4=e 5=p
 INST_ARR:       .word 0 0 0 0 0 0 0 0 5 3 2 4 5 2 4 1 5 4 1 3 5 4 1 1 1 1 4 4 4 4 4 5 1 4 2 5 4 2 3 5 2 3 1 5
