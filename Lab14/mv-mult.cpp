@@ -28,6 +28,7 @@ mv_mult_vector(float mat[SIZE][SIZE], float vec[SIZE]) {
         }
         _mm_storeu_ps(temp,acc);
         ret[i] += temp[0]+temp[1]+temp[2]+temp[3];
+        acc = _mm_set1_ps(0.0);
         for (; j < SIZE; j++) {
                 ret[i] += mat[i][j] * vec[j];
         }
