@@ -1,0 +1,15 @@
+Grades for version committed on time
+	mandelbrot: 50 / 50
+			*Passed test: Achieved ~4x speedup
+		
+	compiler_vectorization: 25.0 / 30
+			*Passed test: t1
+			*Passed test: t2
+			*Passed test: t3
+			*Failed test: t4 - Did not achieve required speedup.
+			*Passed test: t5
+			*Passed test: t6 (vectorizing this code was not expected)
+		
+Total: 75.0 / 80
+
+Final Score: 75.0 / 80
